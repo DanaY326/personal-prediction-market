@@ -20,7 +20,7 @@ describe("PredictionMarket", function () {
       .withArgs(0, creator.address, "Who wins the game?", ["Team A", "Team B"], deadline);
 
     expect(await market.eventCount()).to.equal(1);
-    const ev = await market.getEvent(0);
+    const ev = await market.getEventDetails(0);
     expect(ev.question).to.equal("Who wins the game?");
     expect(ev.options).to.deep.equal(["Team A", "Team B"]);
     expect(ev.resolved).to.equal(false);
@@ -48,7 +48,7 @@ describe("PredictionMarket", function () {
       .withArgs(0, alice.address, 0, ethers.parseEther("1"));
     await market.connect(bob).placeBet(0, 1, { value: ethers.parseEther("2") });
 
-    const ev = await market.getEvent(0);
+    const ev = await market.getEventDetails(0);
     expect(ev.totalPool).to.equal(ethers.parseEther("3"));
     expect(ev.optionPools[0]).to.equal(ethers.parseEther("1"));
     expect(ev.optionPools[1]).to.equal(ethers.parseEther("2"));

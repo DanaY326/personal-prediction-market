@@ -142,7 +142,7 @@ contract PredictionMarket {
         return events.length;
     }
 
-    function getEvent(uint256 eventId) external view eventExists(eventId) returns (EventView memory) {
+    function getEventDetails(uint256 eventId) external view eventExists(eventId) returns (EventView memory) {
         Event storage e = events[eventId];
         uint256[] memory pools = new uint256[](e.options.length);
         for (uint256 i = 0; i < e.options.length; i++) {
